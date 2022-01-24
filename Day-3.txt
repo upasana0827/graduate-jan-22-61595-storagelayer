@@ -1,0 +1,68 @@
+1.select first_name, last_name, date_of_birth from directors ORDER BY date_of_birth ASC;
+-------------------------------------------------------------------------------------------
+2.select distinct(nationality) from directors;
+--------------------------------------------------------------------------------------------
+3.select first_name, last_name, date_of_birth from actors where gender='F' LIMIT 10;
+---------------------------------------------------------------------------------------
+4.SELECT movie_name, international_takings
+FROM movies
+NATURAL JOIN movie_revenues
+WHERE international_takings IS NOT NULL
+ORDER BY international_takings DESC
+LIMIT 3;
+---------------------------------------------------------------------------------------------
+5.SELECT CONCAT(first_name,' ', last_name) AS full_name
+FROM directors;
+-------------------------------------------------------------------
+6.select first_name, date_of_birth
+
+FROM actors
+
+WHERE first_name IS NULL OR date_of_birth IS NULL;
+------------------------------------------------------------------------
+7.SELECT COUNT(*) FROM actors WHERE date_of_birth>'1970-01-01';
+------------------------------------------------------------------------
+8.SELECT MAX(domestic_takings) AS Highest_domestic_takings , MIN(domestic_takings) AS Lowest_domeastic_takings
+FROM movie_revenues;
+---------------------------------------------------------------------------------------------
+9. SELECT SUM(movie_length) FROM movies WHERE age_certificate='15';
+---------------------------------------------------------------------------------------------------
+10.SELECT COUNT(*) FROM directors WHERE nationality='Japanese';
+--------------------------------------------------------------------------------------
+11.SELECT AVG(movie_length) FROM movies WHERE movie_lang='Chinese'; 
+----------------------------------------------------------------------------
+12.SELECT COUNT(*), nationality FROM directors GROUP BY nationality;
+-----------------------------------------------------------------
+13.SELECT SUM(movie_length), age_certificate, movie_lang
+FROM movies
+GROUP BY age_certificate, movie_Lang;
+-------------------------------------------------------
+14.SELECT movie_lang
+FROM movies
+GROUP BY movie_lang
+HAVING SUM(movie_length) > 500;
+------------------------------------------------------------------------------
+15.SELECT movie_name, domestic_takings,international_takings FROM movies.movie_id JOIN movie_revenues.movie_id WHERE international_takings IS NULL ORDER BY movie_name;
+-----------------------------------------------------------------
+16.SELECT movie_name, release_date,international_takings FROM movies.movie_id NATURAL JOIN movie_revenues.movie_id WHERE movie_lang = 'English';
+----------------------------------------------------
+17.SELECT movie_name, domestic_takings, international_takings
+FROM movies JOIN movie_revenues ON movies.movie_id=movie_revenues.movie_id
+ORDER BY movie_name;
+------------------------------------------------------------------------------------
+18.SELECT first_name, last_name, movie_name, age_certificate FROM directors.director_id LEFT JOIN movies.director_id WHERE nationality = 'British';
+--------------------------------------------------------------------
+19.SELECT first_name || ' ' || last_name AS full_name, COUNT(movie_id)
+FROM directors
+NATURAL JOIN movies
+GROUP BY director_id;
+-----------------------------------------------------------------------------------
+20.SELECT first_name, last_name, date_of_birth
+FROM directors
+UNION
+SELECT first_name, last_name, date_of_birth
+FROM actors;
+----------------------------------------------
+21.select first_name, last_name from directors where date_of_birth between '1960-01-01' and '1969-12-31' union select first_name, 
+last_name from actors where date_of_birth between '1960-01-01' and '1969-12-31' order by last_name;
+----------------------------------------------------------------------------------------------
